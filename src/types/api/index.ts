@@ -8,4 +8,21 @@ interface IAuthApiResponse extends IUser {
   accessToken: string;
   refreshToken: string;
 }
-export type {IAuthApiResponse, IAuthCred};
+interface IPost {
+  id: number;
+  title: string;
+  reactions: {
+    likes: number;
+    dislikes: number;
+  };
+  userId: number;
+}
+
+interface IPostResponse {
+  posts: IPost[];
+  total: number;
+  skip: number;
+  limit: number;
+}
+
+export type {IAuthApiResponse, IAuthCred, IPost, IPostResponse};

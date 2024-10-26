@@ -1,12 +1,6 @@
-import {NavigationContainer} from '@react-navigation/native';
 import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
-import {
-  KeyboardAvoidingView,
-  SafeAreaView,
-  Platform,
-  StatusBar,
-} from 'react-native';
+import {KeyboardAvoidingView, SafeAreaView} from 'react-native';
 
 import {persistor, store} from './src/redux/store/Store';
 import AppNavigation from './src/navigation/AppNavigation';
