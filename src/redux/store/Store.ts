@@ -7,7 +7,7 @@ import AuthReducer from '../reducers/AuthReducer';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['auth'],
+  whitelist: ['auth'],
 };
 
 const reducers = combineReducers({
