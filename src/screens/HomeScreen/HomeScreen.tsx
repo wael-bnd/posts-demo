@@ -12,9 +12,17 @@ import {
 import {fetchPosts} from '../../services/postsService';
 import {useDispatch, useSelector} from 'react-redux';
 import {FlashList} from '@shopify/flash-list';
-import {IPost, IPostResponse, RootState} from '../../types';
+import {
+  INavigation,
+  IPost,
+  IPostItem,
+  IPostResponse,
+  RootState,
+} from '../../types';
 import {styles} from './HomeScreen.styles';
 import {resetAuthData} from '../../redux/reducers';
+import {useNavigation} from '@react-navigation/native';
+import {EPrivateScreen} from '../../enum';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -28,7 +36,7 @@ const HomeScreen = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [snackVisible, setSnackVisible] = useState<boolean>(false);
   const [searching, setSearching] = useState<boolean>(false);
-
+  const navigation = useNavigation<INavigation>();
   const loadPosts = async () => {
     if (!hasMore || searching) return;
 
@@ -104,7 +112,7 @@ const HomeScreen = () => {
     }
   };
 
-  const renderPost = ({item}: {item: any}) => (
+  const renderPost = ({item}: {item: IPostItem}) => (
     <Card style={styles.card}>
       <Card.Content>
         <Image
@@ -120,7 +128,7 @@ const HomeScreen = () => {
         <Button
           mode="contained"
           onPress={() => {
-            /* Navigate to post detail screen */
+            handleViewDetails(item);
           }}>
           View Details
         </Button>
@@ -130,6 +138,23 @@ const HomeScreen = () => {
   const handleLogout = () => {
     dispatch(resetAuthData());
   };
+  const handleViewDetails = async (item: IPostItem) => {
+    const user = await fetchUserById(item.userId);
+
+    navigation.navigate(EPrivateScreen.PostDetailsScreen, {
+      post: item,
+      user: {
+        fullName: `${user.firstName} ${user.lastName}`,
+        email: user.email,
+        phone: user.phone,
+        username: user.username,
+        gender: user.gender,
+        dob: user.birthDate,
+        profileImage: user.image,
+      },
+    });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.welcomeContainer}>
