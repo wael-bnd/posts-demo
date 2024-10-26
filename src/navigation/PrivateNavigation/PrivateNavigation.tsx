@@ -1,7 +1,7 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {EPrivateScreen} from '../../enum';
-import {HomeScreen} from '../../screens';
+import {HomeScreen, PostDetailsScreen} from '../../screens';
 
 const Stack = createStackNavigator();
 const PrivateNavigation = () => {
@@ -11,6 +11,13 @@ const PrivateNavigation = () => {
         <Stack.Screen
           name={EPrivateScreen.HomeScreen}
           component={HomeScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={EPrivateScreen.PostDetailsScreen}
+          component={PostDetailsScreen}
           options={{
             headerShown: false,
           }}
