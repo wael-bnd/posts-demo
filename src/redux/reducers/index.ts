@@ -1,3 +1,2 @@
-import {resetAuthData, setAuthData} from './AuthReducer';
-
-export {setAuthData, resetAuthData};
+export * from './AuthReducer';
+export * from './LoggerReducer';

@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {ScrollView, View, Text} from 'react-native';
 import {TextInput, Button, Title, Snackbar} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {styles} from './LoginScreen.styles';
 import {loginUser} from '../../services/authService';
 import {useDispatch} from 'react-redux';
-import {setAuthData} from '../../redux/reducers';
+import {logUserAction, setAuthData, setUsername} from '../../redux/reducers';
 import {IUser} from '../../types';
+import {useFocusEffect} from '@react-navigation/native';
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,11 @@ const LoginScreen = () => {
   const [loading, setLoading] = useState(false);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
-
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(logUserAction('login-screen'));
+    }, [dispatch]),
+  );
   const onLoginPress = async () => {
     setForm({
       username: {...form.username, error: ''},
@@ -68,6 +73,8 @@ const LoginScreen = () => {
           user: userData,
         }),
       );
+      dispatch(setUsername(response.authData));
+      dispatch(logUserAction('login'));
     } else {
       setSnackbarMessage(response.message);
       setSnackbarVisible(true);

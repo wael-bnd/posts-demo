@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, Image, View, Text} from 'react-native';
 import {
   Card,
@@ -20,8 +20,8 @@ import {
   RootState,
 } from '../../types';
 import {styles} from './HomeScreen.styles';
-import {resetAuthData} from '../../redux/reducers';
-import {useNavigation} from '@react-navigation/native';
+import {logUserAction, resetAuthData} from '../../redux/reducers';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {EPrivateScreen} from '../../enum';
 
 const HomeScreen = () => {
@@ -37,6 +37,11 @@ const HomeScreen = () => {
   const [snackVisible, setSnackVisible] = useState<boolean>(false);
   const [searching, setSearching] = useState<boolean>(false);
   const navigation = useNavigation<INavigation>();
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(logUserAction('post-list-screen'));
+    }, [dispatch]),
+  );
   const loadPosts = async () => {
     if (!hasMore || searching) return;
 
@@ -139,6 +144,7 @@ const HomeScreen = () => {
     dispatch(resetAuthData());
   };
   const handleViewDetails = async (item: IPostItem) => {
+    dispatch(logUserAction('post-click'));
     const user = await fetchUserById(item.userId);
 
     navigation.navigate(EPrivateScreen.PostDetailsScreen, {

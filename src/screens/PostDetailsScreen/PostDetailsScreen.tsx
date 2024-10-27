@@ -1,13 +1,21 @@
 import {View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 import {IPostDetailsScreenProps} from '../../types';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {styles} from './PostDetailsScreen.styles';
+import {useCallback} from 'react';
+import {useDispatch} from 'react-redux';
+import {logUserAction} from '../../redux/reducers';
 
 const PostDetailsScreen = (props: Readonly<IPostDetailsScreenProps>) => {
   const {post, user} = props.route.params;
   const navigation = useNavigation();
-
+  const dispatch = useDispatch();
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(logUserAction('post-detail-screen'));
+    }, [dispatch]),
+  );
   return (
     <View style={styles.container}>
       <View style={styles.header}>
