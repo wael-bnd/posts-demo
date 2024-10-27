@@ -14,5 +14,14 @@ interface IAuthReducer {
   refreshToken: string;
   user: IUser | null;
 }
-export type {IAuthReducer, IUser};
+interface LogEntry {
+  action: string;
+  ts: string;
+}
+
+interface LoggerState {
+  data: LogEntry[];
+  username: string | null;
+}
+export type {IAuthReducer, IUser, LoggerState, LogEntry};
 export type RootState = ReturnType<typeof store.getState>;
