@@ -52,13 +52,13 @@ Build a mobile app using React Native and TDD principles to demonstrate your ski
    ```bash
    npm install
    ```
-3. Navigate to the iOS directory and install CocoaPods:
+3. Navigate to the iOS directory and install CocoaPods (Only for macOS users):
 
-```bash
-cd ios
-pod install
-cd ..
-```
+   ```bash
+   cd ios
+   pod install
+   cd ..
+   ```
 
 4. Run the app on Android:
    ```bash
