@@ -141,6 +141,7 @@ const HomeScreen = () => {
     </Card>
   );
   const handleLogout = () => {
+    dispatch(logUserAction('logout'));
     dispatch(resetAuthData());
   };
   const handleViewDetails = async (item: IPostItem) => {

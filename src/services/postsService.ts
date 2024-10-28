@@ -9,8 +9,8 @@ export const fetchPosts = async (page: number): Promise<any[]> => {
         Authorization: `Bearer ${accessToken}`,
       },
       params: {
-        limit: 30,
-        skip: (page - 1) * 30,
+        limit: 10,
+        skip: (page - 1) * 10,
       },
     });
     return response.data.posts;
