@@ -57,6 +57,7 @@ const LoginScreen = () => {
     setLoading(false);
 
     if (response.success) {
+      dispatch(logUserAction('login'));
       let userData: IUser = {
         id: response.authData.id,
         username: response.authData.username,
@@ -73,8 +74,7 @@ const LoginScreen = () => {
           user: userData,
         }),
       );
-      dispatch(setUsername(response.authData));
-      dispatch(logUserAction('login'));
+      dispatch(setUsername(response.authData.username));
     } else {
       setSnackbarMessage(response.message);
       setSnackbarVisible(true);
