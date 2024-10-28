@@ -1,7 +1,14 @@
 {
   "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "lib": ["es6", "dom"],
     "jsx": "react-native",
-    "types": ["jest", "react", "react-native"]
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/__tests__/*"]
 }
