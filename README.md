@@ -1,6 +1,6 @@
 # 📱 PostsDemo - React Native Development Test
 
-A mobile application developed with **React Native** and **TypeScript** following **Test-Driven Development (TDD)** principles. The project demonstrates skills in mobile app development, API integration, pagination, search functionality, background tasks, and in-app storage.
+A mobile application developed with **React Native** and **TypeScript** following **Test-Driven Development (TDD)** principles.
 
 ---
 
